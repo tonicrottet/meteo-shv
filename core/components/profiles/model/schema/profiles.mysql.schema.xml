@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="profiles" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+
+	<object class="MeteoUser" table="meteo_users" extends="xPDOSimpleObject">
+		<field key="shvnr" dbtype="varchar" precision="255" phptype="string" null="false" default=""/>
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		
+		<index alias="shvnr" name="shvnr" primary="false" unique="false">
+      		<column key="shvnr" length="" collation="A" null="false" />
+		</index>
+		
+		<composite alias="Profiles" class="Profile" local="id" foreign="profile" cardinality="many" owner="local" />
+	</object>
+
+
+	<object class="Profile" table="meteo_profiles" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		<field key="mode" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		<field key="standard" dbtype="int" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
+		<field key="settings" dbtype="text" phptype="string" null="true" />
+		
+		<field key="owner" dbtype="int" precision="11" phptype="integer" null="true" />
+		
+		<aggregate alias="MeteoUser" class="MeteoUser" local="owner" foreign="id" cardinality="one" owner="foreign" />
+		
+		<field key="menu" dbtype="int" precision="10" phptype="integer" null="false" default="" />
+    	<aggregate alias="Menu" class="Menu" local="menu" foreign="id" cardinality="one" owner="foreign" />
+
+		<field key="view" dbtype="int" precision="10" phptype="integer" null="false" default="" />
+    	<aggregate alias="View" class="View" local="menu" foreign="id" cardinality="one" owner="foreign" />
+		
+	</object>
+
+	<object class="Menu" table="meteo_menus" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		<field key="menucache" dbtype="text" phptype="string" null="true" />
+		<field key="generator" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+
+		<index alias="name" name="name" primary="false" unique="false">
+      		<column key="name" length="" collation="A" null="false" />
+		</index>
+
+		<composite alias="MenuEntry" class="MenuEntry" local="id" foreign="menuentry" cardinality="many" owner="local" />
+	</object>
+	
+	<object class="MenuEntry" table="meteo_menuentries" extends="xPDOSimpleObject">
+		<field key="entry" dbtype="text" phptype="string" null="true" />
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		<field key="type" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+
+		<field key="menu" dbtype="int" precision="10" phptype="integer" null="false" default="" />
+    	<aggregate alias="Menu" class="Menu" local="menu" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+
+	<object class="View" table="meteo_views" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		<field key="skin" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+
+		<composite alias="ViewEntry" class="ViewEntry" local="id" foreign="viewentry" cardinality="many" owner="local" />
+	</object>
+	
+
+	<object class="ViewEntry" table="meteo_viewentries" extends="xPDOSimpleObject">
+
+		<field key="entrydata" dbtype="text" phptype="string" null="true" />
+		<field key="entryname" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+
+		<field key="view" dbtype="int" precision="10" phptype="integer" null="false" default="" />
+    	<aggregate alias="View" class="View" local="view" foreign="id" cardinality="one" owner="foreign" />
+	</object>
+	
+</model>

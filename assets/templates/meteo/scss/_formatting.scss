@@ -1,0 +1,92 @@
+@import "azoommixins";
+@import "variables";
+
+
+* {
+}
+
+a {
+	
+}
+
+h1 {
+	font-size: 2rem;
+	text-transform: uppercase;
+	margin-bottom: 0.8rem;
+	margin-top: 0;
+	font-family: $font-family2;
+	border-bottom: 1px solid $body-color;
+	display: inline-block;
+}
+
+h2 {
+	font-size: 1.1rem;
+	margin-top: 0.6rem;
+	margin-bottom: 0.4rem;
+}
+
+h3 {
+	font-size: 1.0rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.3rem;
+}
+
+h4 {
+	font-size: 0.9rem;
+	margin-top: 0.4rem;
+	margin-bottom: 0.2rem;
+}
+
+
+
+.grey {
+	color: $darkgrey !important;		
+}
+
+
+ul, ol {
+	font-size: 0.9rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	
+	li {
+		margin-top: 0.1rem;
+		margin-bottom: 0.3rem;		
+	}
+}
+
+p, section {
+	margin: 0.1em 0 0.3em 0;
+	font-size: 0.9rem;
+	
+	&.justifyright {
+		text-align: right;	
+	}
+	
+	&.justifyleft {
+		text-align: left;	
+	}
+	
+	&.justifyfull {
+		text-align: justify;	
+	}
+}
+
+td {
+	font-size: 0.9rem;	
+}
+
+div {
+	font-size: 0.9rem;	
+}
+
+figure {
+	margin: 0;	
+}
+
+hr {
+	border: 0;
+	height: 1px;
+	color: black;
+	background-color: black;	
+}

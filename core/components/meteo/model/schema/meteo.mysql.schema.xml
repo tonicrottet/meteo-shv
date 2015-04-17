@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="meteo" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM">
+
+	<object class="SHVUser" table="shv_users" extends="xPDOSimpleObject">
+		<field key="nr" dbtype="varchar" precision="10" phptype="string" null="false" default=""/>
+		<field key="art" dbtype="varchar" precision="10" phptype="string" null="true" default=""/>
+		<field key="password" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		<field key="step" dbtype="varchar" precision="10" phptype="string" null="true" default=""/>
+		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+
+		<index alias="nr" name="nr" primary="false" unique="false">
+      		<column key="nr" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+
+	<object class="SHVMeteoUser" table="shvmeteo_users" extends="xPDOSimpleObject">
+		<field key="SHVUser" dbtype="int" precision="11" phptype="integer" null="true" />
+		<field key="MeteoUser" dbtype="int" precision="11" phptype="integer" null="true" />
+		<field key="data" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+	</object>
+
+
+	<object class="SHVMeteoUserToken" table="shvmeteo_user_tokens" extends="xPDOSimpleObject">
+		<field key="SHVMeteoUser" dbtype="int" precision="11" phptype="integer" null="true" />
+		<field key="token" dbtype="varchar" precision="100" phptype="string" null="true" />
+		<field key="verifier" dbtype="varchar" precision="100" phptype="string" null="true" default=""/>
+		<field key="expires" dbtype="datetime" phptype="datetime" null="true"/>
+
+		<index alias="token" name="token" primary="false" unique="false">
+      		<column key="token" length="" collation="A" null="false" />
+		</index>
+
+		<index alias="SHVMeteoUser" name="SHVMeteoUser" primary="false" unique="false">
+      		<column key="SHVMeteoUser" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+	<object class="SHVExtUser" table="shv_extusers" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="10" phptype="string" null="false" default=""/>
+		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		<field key="password" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
+		
+		<index alias="name" name="name" primary="false" unique="false">
+      		<column key="name" length="" collation="A" null="false" />
+		</index>
+	</object>
+
+</model>

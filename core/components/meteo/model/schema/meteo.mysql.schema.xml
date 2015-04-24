@@ -37,7 +37,7 @@
 	</object>
 
 	<object class="SHVExtUser" table="shv_extusers" extends="xPDOSimpleObject">
-		<field key="name" dbtype="varchar" precision="10" phptype="string" null="false" default=""/>
+		<field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default=""/>
 		<field key="email" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
 		<field key="password" dbtype="varchar" precision="255" phptype="string" null="true" default=""/>
 		

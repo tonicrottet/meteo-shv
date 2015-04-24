@@ -11,6 +11,8 @@
  *
  * @param string $dir Directory name
  * @param boolean $deleteRootToo Delete specified top-level directory as well
+ *
+ * Change: don't delete .htaccess and php files
  */
 function unlinkRecursive($dir, $deleteRootToo)
 {
@@ -20,7 +22,7 @@ function unlinkRecursive($dir, $deleteRootToo)
     }
     while (false !== ($obj = readdir($dh)))
     {
-        if($obj == '.' || $obj == '..')
+        if($obj == '.' || $obj == '..' || $obj == '.htaccess' || (stripos(strrev($obj), strrev('.php')) === 0))
         {
             continue;
         }

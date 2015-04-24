@@ -129,7 +129,7 @@ switch ($action) {
 				}
 			}
 
-			// /NEWCODE
+			// /NEWCODE 
 		}
 
 		if($shvuser == null || $shvuser->get('id') == 1) {

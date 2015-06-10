@@ -1,0 +1,21 @@
+/******************************************
+** 
+** Copyright (c), 2014, azoom.ch 
+** 
+** Created by Toni Crottet (toni@azoom.ch)
+**
+*******************************************/
+/* CSS Document */
+body { font-family: "Lucida Console", Monaco, monospace; }
+
+/* Tel numbers don't display as a link */
+a { color: #0093d7; }
+a:hover { color: #c20016; }
+
+.curvalues table { max-width: 520px; width: 100%; border-collapse: collapse; border-spacing: 0; }
+.curvalues table tr:nth-child(odd) { background-color: #eee; }
+.curvalues table td { line-height: 1.5em; }
+.curvalues .windstation { margin-bottom: 1em; }
+.curvalues .pressurediff { margin-top: 2em; }
+
+@media (max-width: 320px) { body { font-size: 0.9rem; } }

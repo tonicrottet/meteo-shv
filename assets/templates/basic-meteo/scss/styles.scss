@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+@import "copyright";
+@import "azoommixins";
+@import "websitemixins";
+@import "variables";
+
+body {
+ font-family: "Lucida Console", Monaco, monospace;
+}
+
+/* Tel numbers don't display as a link */
+a {
+	@include anchor-colors($skin-color1, $skin-color2);
+}
+
+.curvalues {
+	table {
+		max-width: 520px;
+		width:100%;
+		border-collapse: collapse;
+  		border-spacing: 0;
+
+		tr:nth-child(odd) {
+			background-color: #eee;
+		}
+
+		td {
+			line-height: 1.5em;
+		}
+	}
+
+	.windstation {
+		margin-bottom: 1em;
+	} 
+
+	.pressurediff {
+		margin-top: 2em;
+	}
+}
+
+
+@media (max-width: 320px) {
+	body {
+		font-size: 0.9rem;
+	}
+}

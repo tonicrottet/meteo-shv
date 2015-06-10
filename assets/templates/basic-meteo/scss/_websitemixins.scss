@@ -1,0 +1,43 @@
+/* CSS Document */
+
+@import "azoommixins";
+@import "variables";
+
+
+///////////////////////////////////////
+//
+// website-row-container
+//
+// for container-like elements,
+// positioned in the middle
+//
+@mixin website-row-container () {
+	@include container($container-min-width, $container-max-width);
+}
+
+
+///////////////////////////////////////
+//
+// website-link-as-button
+//
+// for links looking like buttons
+//
+@mixin website-link-as-button () {
+	padding: 3px 10px 3px 10px;
+	background-color: $button-backgroundcolor;
+	font-family: $font-family3;
+	text-transform: uppercase;
+	line-height: 1.4em;
+	text-decoration: none;
+
+	
+	display: inline-block;
+
+	@include anchor-colors($button-color, $button-hovercolor)
+
+}
+
+
+
+
+

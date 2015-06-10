@@ -111,11 +111,15 @@ function optimize_png($file) {
     return true;
 }
 
+/*
+
 foreach (glob($extractto . '/' . $filematch) as $filename) {
     echo "optmizing " . $filename . "<br>";
     optimize_png($filename);
 
 }
+
+*/
 
 echo "DONE";
 

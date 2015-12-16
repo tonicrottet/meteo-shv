@@ -106,75 +106,168 @@ switch ($action) {
 
 		// from here we have values inside $reqshvnr and $reqpassword
 
-		// try to find the with the nr field first, this should be unique
-		$shvuser = $modx->getObject('SHVUser', array('nr' => $reqshvnr));
 
-		if($shvuser == null || $shvuser->get('id') == 1) {
-			// try with id field, but this is by "DESIGN" unfortunately not unique
-			// so, get a Collection
+		// Start Login method
+		$loginmethod = $modx->getOption('loginmethod', null, 'csvimport');
 
-			// OLDCODE 
-			// $shvuser = $modx->getObject('SHVUser', $reqshvnr);
-			// /OLDCODE
 
-			// NEWCODE
-			$shvusers = $modx->getIterator('SHVUser', array('id' => $reqshvnr));
+		switch ($loginmethod) {
 
-			$t_hasher = new PasswordHash(8, FALSE);
-			foreach ($shvusers as $curuser) {
-				$hash = $curuser->get('password');
-				if($t_hasher->CheckPassword($reqpassword, $hash)) {
-					// FOUND!!
-					$shvuser = $curuser;
+			// Standart Login Method
+			case 'csvimport':
+			default:
+				// try to find the with the nr field first, this should be unique
+				$shvuser = $modx->getObject('SHVUser', array('nr' => $reqshvnr));
+
+				if($shvuser == null || $shvuser->get('id') == 1) {
+					// try with id field, but this is by "DESIGN" unfortunately not unique
+					// so, get a Collection
+
+					// OLDCODE 
+					// $shvuser = $modx->getObject('SHVUser', $reqshvnr);
+					// /OLDCODE
+
+					// NEWCODE
+					$shvusers = $modx->getIterator('SHVUser', array('id' => $reqshvnr));
+
+					$t_hasher = new PasswordHash(8, FALSE);
+					foreach ($shvusers as $curuser) {
+						$hash = $curuser->get('password');
+						if($t_hasher->CheckPassword($reqpassword, $hash)) {
+							// FOUND!!
+							$shvuser = $curuser;
+						}
+					}
+
+					// /NEWCODE 
 				}
-			}
 
-			// /NEWCODE 
+				if($shvuser == null || $shvuser->get('id') == 1) {
+
+					// Check SHVExtUser 
+					$shvextuser = $modx->getObject('SHVExtUser', array('email' => $reqshvnr));
+
+					if($shvextuser == null || $shvextuser->get('id') == 1) {
+						$formerror = true;
+						$modx->setPlaceholder('dLA.formerror.message', $modx->lexicon('login.loginerror'));
+						$modx->setPlaceholder('dLA.value.shvnr', $reqshvnr);
+						return;
+					}
+
+					if($reqpassword != $shvextuser->get('password')) {
+						$formerror = true;
+						$modx->setPlaceholder('dLA.formerror.message', $modx->lexicon('login.loginerror'));
+						$modx->setPlaceholder('dLA.value.shvnr', $reqshvnr);
+						return;
+					}
+
+					$userid = $shvextuser->get('id');
+					$username = $shvextuser->get('name');
+
+				} else {
+					// a $shvuser is found
+					//check password against
+					$passhashstring = $shvuser->get('password');
+
+					$t_hasher = new PasswordHash(8, FALSE);
+					$check = $t_hasher->CheckPassword($reqpassword, $passhashstring);
+
+					if(!$check) {
+						$formerror = true;
+						$modx->setPlaceholder('dLA.formerror.message', $modx->lexicon('login.loginerror'));
+						$modx->setPlaceholder('dLA.value.shvnr', $reqshvnr);
+						return;
+					}
+
+					// Code for change 17.04.2015, id is not unique, nr is instead, needs a system reset before change
+					// $userid = $shvuser->get('nr');
+					$userid = $shvuser->get('id');
+					$username = $shvuser->get('nr');
+				}
+			break;
+
+			// Make online direct request URL is: https://www.shv-fsvl.ch/authentification.php delivering "username", "password" as POST Vars
+			case 'online':
+				$posturl = $modx->getOption('loginonlineurl', null, 'https://www.shv-fsvl.ch/authentification.php');
+
+				$postfields = array(
+					'username' => $reqshvnr,
+					'password' => $reqpassword
+					);
+
+				$options = array(
+    				'http' => array(
+        			'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        			'method'  => 'POST',
+        			'content' => http_build_query($postfields),
+    				),
+				);
+
+				$context  = stream_context_create($options);
+				$result = file_get_contents($posturl, false, $context);
+				
+				// now, inside the result string we either have nothing or a string in format:
+				//  42969 Toni Crottet toni@piis.ch d
+				// SHV Nr., Name, email, language
+				// or
+				// empty string if password fails
+				// or
+				// "no data"
+				// if the user is not known
+
+				/*
+
+				    <?xml version="1.0" encoding="utf-8"?>
+				    <authentification>
+				   		<error>no data</error>
+				    </authentification>
+
+				    <?xml version="1.0" encoding="utf-8"?>
+				    <authentification>
+				   		<notauthorized/>
+				    </authentification>
+
+					<?xml version="1.0" encoding="utf-8"?>
+					<authentification>
+  						<user>
+							<number>42969</number>
+							<firstname>Toni</firstname>
+							<lastname>Crottet</lastname>
+							<email>toni@piis.ch</email>
+							<language>d</language>
+						</user>
+					</authentification>
+				*/
+
+				if($result == "") {
+					$formerror = true;
+					$modx->setPlaceholder('dLA.formerror.message', $modx->lexicon('login.loginerror'));
+					$modx->setPlaceholder('dLA.value.shvnr', $reqshvnr);
+					return;							
+				}
+
+				// 3-line xml to array
+				$xml = simplexml_load_string($result);
+				$json = json_encode($xml);
+				$resarray = json_decode($json,TRUE);
+
+				if(array_key_exists('user', $resarray)) {
+					// set id and username
+					$userid = $resarray['user']['number'];
+					$username = $resarray['user']['firstname'] . " " . $resarray['user']['lastname'];
+				} else {
+					$formerror = true;
+					$modx->setPlaceholder('dLA.formerror.message', $modx->lexicon('login.loginerror'));
+					$modx->setPlaceholder('dLA.value.shvnr', $reqshvnr);
+					return;							
+				}
+
+			break;
+
 		}
 
-		if($shvuser == null || $shvuser->get('id') == 1) {
 
-			// Check SHVExtUser 
-			$shvextuser = $modx->getObject('SHVExtUser', array('email' => $reqshvnr));
-
-			if($shvextuser == null || $shvextuser->get('id') == 1) {
-				$formerror = true;
-				$modx->setPlaceholder('dLA.formerror.message', $modx->lexicon('login.loginerror'));
-				$modx->setPlaceholder('dLA.value.shvnr', $reqshvnr);
-				return;
-			}
-
-			if($reqpassword != $shvextuser->get('password')) {
-				$formerror = true;
-				$modx->setPlaceholder('dLA.formerror.message', $modx->lexicon('login.loginerror'));
-				$modx->setPlaceholder('dLA.value.shvnr', $reqshvnr);
-				return;
-			}
-
-			$userid = $shvextuser->get('id');
-			$username = $shvextuser->get('name');
-
-		} else {
-			// a $shvuser is found
-			//check password against
-			$passhashstring = $shvuser->get('password');
-
-			$t_hasher = new PasswordHash(8, FALSE);
-			$check = $t_hasher->CheckPassword($reqpassword, $passhashstring);
-
-			if(!$check) {
-				$formerror = true;
-				$modx->setPlaceholder('dLA.formerror.message', $modx->lexicon('login.loginerror'));
-				$modx->setPlaceholder('dLA.value.shvnr', $reqshvnr);
-				return;
-			}
-
-			// Code for change 17.04.2015, id is not unique, nr is instead, needs a system reset before change
-			// $userid = $shvuser->get('nr');
-			$userid = $shvuser->get('id');
-			$username = $shvuser->get('nr');
-		}
-
+		// End Login Method
 
 
 		// arrived here we are password and user are validated
@@ -201,6 +294,12 @@ switch ($action) {
 			$shvmeteouser->set('SHVUser', $userid);
 			$shvmeteouser->set('MeteoUser', $meteouser->get('id'));
 			$shvmeteouser->save();
+		} else {
+			//update username in db
+			$meteouserid = $shvmeteouser->get('MeteoUser');
+			$meteouser = $modx->getObject('MeteoUser', $meteouserid);
+			$meteouser->set('name', $username);
+			$meteouser->save();
 		}
 
 		// check for permanently logged in flag
@@ -213,6 +312,7 @@ switch ($action) {
 				$shvmeteousertoken->remove();
 			}
 
+			$t_hasher = new PasswordHash(8, FALSE);
 			$token = base64_encode($t_hasher->get_random_bytes(32));
 			$auth =  base64_encode($t_hasher->get_random_bytes(32));
 

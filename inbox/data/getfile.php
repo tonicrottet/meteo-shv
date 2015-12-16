@@ -26,9 +26,19 @@ if (!isset($_SESSION['meteouserid']))
 }
 
 $name = $_GET['q'];
+
+if($name === '') exit();
+
 $fp = fopen($name, 'rb');
 
 $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+
+if (!$finfo) {
+    $modx->log(xPDO::LOG_LEVEL_ERROR,'No File Found, File: ' . $name,'','getfile.php',__FILE__,__LINE__);
+    exit;
+}
+
+
 $mimetype = finfo_file($finfo, $filename);
 finfo_close($finfo);
 

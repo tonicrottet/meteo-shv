@@ -1,0 +1,79 @@
+@charset "utf-8";
+
+@import "azoommixins";
+@import "websitemixins";
+@import "variables";
+
+
+.curvalues {
+	table {
+		width: 100%;
+	}
+
+	td {
+		line-height: 1.5em;
+	}
+
+	td.value {
+		text-align: right;
+		width: 10em;
+		padding-right: 1em;
+	}
+}
+
+.menulist {
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		display: inline-block;
+
+		h3 {
+			padding: 0;
+			margin: 0;
+			margin-top: 0.5em;
+			font-size: 1em;
+		}
+
+
+		li {
+			ul {
+				li {
+					float: left;
+
+					&:after {
+						content: "|";
+						padding-left: 0.3em;
+						padding-right: 0.3em;
+					}
+
+					&:last-child:after {
+						content: "";
+						padding-right: 0;
+					}
+				}
+
+			}
+		}
+	}
+
+}
+
+
+@media (min-width: 35em) {
+}
+
+
+@media (min-width: 70em) {
+
+}
+
+@media (min-width: 35em) {
+
+}
+
+
+// 35em is for block stacked
+@media (max-width: 35em) {
+
+}

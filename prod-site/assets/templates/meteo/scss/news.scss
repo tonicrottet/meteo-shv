@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+@import "copyright";
+@import "azoommixins";
+@import "variables";
+@import "websitemixins";
+
+#newscontent {
+	
+	display: table;
+	width: 100%;
+
+	.homelink {
+		display: table-cell;
+		width: $containersize1-3;
+		vertical-align: top;
+		padding-top: 4em;
+		
+		a {
+			@include website-link-as-button();	
+		}
+	}
+	
+	.news {
+		display: table-cell;	
+		vertical-align: top;
+
+		.pageNav {
+			text-align: right;
+			a {
+				text-decoration: none;	
+			}
+		}
+	}
+	
+	
+}

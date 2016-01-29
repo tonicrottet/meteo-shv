@@ -1,0 +1,667 @@
+@charset "utf-8";
+
+@import "copyright";
+@import "normalize";
+@import "azoommixins";
+@import "websitemixins";
+@import "variables";
+
+body {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+.meteo {
+	/* Header */
+	background-color: white;
+
+	> div {
+		background-color: white;
+	}
+
+	text-shadow: none !important;
+
+	.meteo-header {
+		background-color: #fff;
+
+		background-repeat: no-repeat;
+		background-image: url("../images/hintergrundbild.jpg");
+		background-position: center center;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		border: none;
+
+		h2 {
+			padding: 0.4em 0 0.1em;
+			margin: 0 3em;
+
+			a {
+				display: inline-block;
+				text-decoration: none;
+				min-height: 40px;
+			}
+
+			img {
+				display: block;
+				width: 100px;
+				height: auto;
+			}
+
+			& > img {
+				display: inline-block;
+			}
+		}
+
+		p {
+			position: absolute;
+			bottom: -2em;
+			left: 1em;
+			margin: 0;
+			color: $skin-color3;
+			text-transform: uppercase;
+		}
+
+		.ui-btn {
+			width: 39px;
+			height: 39px;
+			background: none;
+			border: 0;
+			top: 25%;
+			margin-top: 0;
+			-webkit-border-radius: 0.3125em;
+		}
+
+		.meteo-navmenu-link {
+			margin-left: 1em;
+		}
+
+		.meteo-settings-link {
+			margin-right: 1em;
+		}
+
+		.headerlinks {
+			display: none;
+		}
+
+		.ui-icon-gear:after {
+			background-image: url("../images/zahnrad.png");
+			width: 39px;
+			height: 39px;
+			margin-top: -19px;
+			margin-left: -19px;
+			border-radius: 0;
+		}
+
+		.ui-icon-gear:after {
+			background-image: url("../images/zahnrad.png");
+			width: 39px;
+			height: 39px;
+			margin-top: -19px;
+			margin-left: -19px;
+			border-radius: 0;
+		}
+
+		.ui-icon-bars:after {
+			background-image: url("../images/menuebalken.png");
+			width: 39px;
+			height: 39px;
+			margin-top: -19px;
+			margin-left: -19px;
+			border-radius: 0;
+		}
+
+	}
+
+	/* Footer */
+	.meteo-footer.ui-footer {
+		position: absolute;
+		bottom: 0;
+		padding-bottom: 0;
+		width: auto;
+	}
+
+	.meteo-footer {
+
+		p {
+			font-size: 0.8em;
+			color: $skin-color4;
+			margin: 1em 1.25em 1em 1em;
+
+			&:first-child {
+				font-size: 0.8em;
+				color: $skin-color3;
+				margin: 1em 1em 1em 1em;
+			}
+		}
+
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+			font-size: 0.8em;
+			display: inline-block;
+			margin: 1em 1em 1em 1em;
+
+			li {
+				float: left;
+
+				a {
+					@include anchor-colors(black, $skin-color3);
+					text-decoration: none;
+				}
+
+				&:after {
+					content: "|";
+					margin-left: 0.5em;
+					margin-right: 0.5em;
+				}
+
+				&:last-child:after {
+					content: "";
+				}
+
+			}
+		}
+	}
+
+	/* Content */
+	.meteo-content {
+
+		.content-pagetitle {
+			margin: 0;
+		}
+
+
+		> section {
+
+			clear: both;
+
+			padding-top: 0.5em;
+			
+			> h1 {
+				font-size: 1.5em;
+				margin: 0 0 0.625;
+			}
+
+			> h2 {
+				color: $skin-color2;
+				background-color: transparent;
+				border-bottom: 1px solid #ddd;
+				font-size: 1.3em;
+				padding-bottom: 0.2em;
+				margin: 0 0 0.7375em;
+			}
+
+			> h3 {
+				color: $skin-color2;
+				font-size: 1.2em;
+				margin: 0.7em 0 0.5em 0;
+			}
+
+			> h4 {
+				margin: 0.7em 0 0.4em 0;
+			}
+
+			> p {
+				font-size: 0.9em;
+				line-height: 1.4;
+				margin: 0 0 0.6em;
+			}
+
+			> ul:not(.meteo-list) li {
+				font-size: 1.2em;
+				line-height: 1.5;
+			}
+
+			> ul, > ol {
+				padding-left: 1.3em;
+			}
+
+			> .ui-listview {
+				padding-left: 0;
+			}
+
+			> a {
+				text-decoration: none;
+			}
+
+			> hr {
+				height: 1px;
+				color: $skin-color3;
+				background-color: $skin-color3;
+				border: 0;
+			} 
+
+			table {
+				border-collapse: separate;
+			}
+
+			td {
+				vertical-align: top;
+
+				font-size: 0.9em;
+
+				p {
+					&:first-child {
+						margin-top: 0;
+					}
+
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
+
+			.lighttable {
+				th, td {
+					padding: 6px 3px 6px 0;
+				}
+			}
+		}
+	}
+}
+
+.meteo-block-content {
+	margin: .25em;
+	padding: 1em;
+	background: #fff;
+	border: 1px solid $skin-color4;
+
+	h3 {
+		font-size: 1.2em;
+		font-weight: 300;
+		color: $skin-color2;
+		border-bottom: 1px solid $skin-color4;
+		padding-bottom: .1em;
+		margin: 0 0 .5em;
+	}
+
+	p {
+		font-size: 0.9em;
+		line-height: 1.3;
+		margin: .7em 0;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.content-pagetitle {
+	font-size: 1.75em;
+	font-weight: 300;
+	color: $skin-color1;
+}
+
+/* Lists */
+.meteo {
+	.meteo-settings .meteo-list {
+		margin: 0 -1em -1em;
+	}
+
+	.meteo-list {
+		.ui-btn, .ui-btn:visited, .ui-li-divider {
+			text-shadow: none !important;
+		}
+
+		.ui-btn:hover, .ui-btn:active {
+			color: $skin-color1;
+		}
+
+		.ui-li-divider {
+			color: $skin-color2;
+		}
+	}
+}
+
+/* Navmenu */
+.meteo-navmenu-panel {
+	.ui-listview {
+
+
+		> li .ui-collapsible-heading {
+			margin: 0;
+		}
+
+		.ui-listview {
+			.ui-btn {
+				padding-left: 1.5em;
+				color: $skin-color3;
+
+				border: none !important;
+
+
+				&:hover, &:active {
+					color: $skin-color1 !important;
+				}
+
+				&.active {
+					color: $skin-color2;
+				}
+
+				&.ui-btn-active {
+					color: $skin-color1;
+				}
+			}
+		}
+	}
+
+	.ui-collapsible.ui-li-static {
+		padding: 0;
+		border: none !important;
+	}
+
+	.ui-collapsible + li > .ui-btn, 
+	.ui-collapsible + .ui-collapsible > .ui-collapsible-heading > .ui-btn,
+	.ui-panel-inner > .ui-listview > li.ui-first-child .ui-btn {
+	}
+
+	.ui-btn:after {
+		opacity: 0.4;
+		filter: Alpha(Opacity=40);
+	}
+
+	&.meteo-panel-page-nav {
+		display: none;
+		position: absolute;
+		top: 178px;
+		left: 12px;
+
+		ul li:first-child a {
+			border-top: none;
+		}
+	}
+}
+
+/* Settings */
+.meteo-settings-panel {
+	.ui-panel-inner {
+		padding-top: 1em;
+	}
+}
+
+
+/* widgets */
+.ui-slider-switch {
+	background-color: $skin-color2 !important;
+	text-shadow: none !important;
+	color: white !important;
+
+	.ui-btn-active {
+		background-color: $skin-color1 !important;
+		color: black !important;
+		text-shadow: none !important;
+	}
+}
+
+.ui-btn.ui-checkbox-on:after {
+	background-color: $skin-color1 !important;
+}
+
+.ui-btn.changed[type="submit"] {
+	background-color: $skin-color5 !important;
+	text-shadow: none;
+}
+
+/* Form controls */
+.ui-input-text, .ui-checkbox, button[type="submit"] {
+	max-width: 25em;
+}
+
+.formerror {
+	color: $skin-color2;
+}
+
+@media (min-width: 35em) {
+	.meteo-navmenu-panel {
+		width: 25em;
+	}
+}
+
+
+@media (min-width: 70em) {
+	.meteo {
+		max-width: 75em;
+		position: relative !important;
+		margin: 0 auto;
+		background-color: transparent;
+
+		.meteo-header, .meteo-footer {
+			margin: 0 10px;
+		}
+
+		.maincontainer {
+			display: table;
+
+			min-width: 100%;
+			background-color: transparent;
+			border-spacing: 10px;
+			overflow: hidden;
+
+			.meteo-content {
+				display: table-cell;
+				background-color: white;
+
+				width: 75%;
+				padding-top: 2em;
+				padding-left: 2%;
+				padding-right: 3%;
+				min-height: 40em;
+			}
+
+			.sidecontainer {
+				display: table-cell;
+				background-color: rgba(255,255,255,0.8);
+				width: 25%;
+			}
+		}
+
+
+		.meteo-header {
+
+			padding-right: 10px;
+
+			background-image: none;
+			background-color: rgba(255,255,255, 0.5);
+
+			h2 {
+				padding: 0;
+				margin: 0;
+
+				a {
+					float: left;
+					width: 598px;
+					background-repeat: no-repeat;
+					background-image: url("../images/meteobg.png");
+					background-position: left bottom;
+				}
+
+				img {
+					margin-left: 12%;
+					width: 141px;
+				}
+			}
+
+			p {
+				bottom: auto;
+				left: auto;
+				top: 50%;
+				right: 15%;
+				font-size: 1.2em;
+				margin-top: -0.625em;
+			}
+
+			.headerlinks {
+				display: block;
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+
+		}
+
+		.meteo-navmenu-link, .meteo-settings-link {
+			display: none;
+		}
+
+		
+
+		.meteo-footer {
+			&.ui-footer {
+				position: static;
+				overflow: hidden;
+			}
+
+			p {
+				float: right;
+				margin: 1.5em 3% 1.5em 1.5em;
+
+				&:first-child {
+					float: left;
+					margin: 1.5em 0em 1.25em 3%;
+				}
+			}
+
+			ul {
+				float: left;
+				margin: 1.5em 1.25em 1.25em 1em;
+			}
+		}
+
+		.meteo-navmenu-panel, .meteo-settings-panel {
+			visibility: visible;
+			position: relative;
+			left: 0;
+			clip: initial;
+			//float: left;
+			//width: 25%;
+			width: 100%;
+			background: none;
+			-webkit-transition: none !important;
+			-moz-transition: none !important;
+			transition: none !important;
+			-webkit-transform: none !important;
+			-moz-transform: none !important;
+			transform: none !important;
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			box-shadow: none;
+
+			.ui-panel-inner {
+				margin-top: 3em;
+				margin-bottom: 3em;
+			}
+		}
+
+	}
+
+	.meteo.meteo-panel-page .meteo-navmenu-panel {
+		display: none;
+	}
+
+	html .meteo.meteo-panel-page .meteo-navmenu-panel.meteo-panel-page-nav {
+		display: block;
+	}
+
+	.meteo-navmenu-panel {
+		.ui-listview {
+			.ui-btn {
+				padding-left: 1em;
+				border-top: 2px solid $skin-color2 !important;
+				border-bottom: none !important;
+			}
+
+			.ui-first-child .ui-btn {
+				border-top: none !important;
+			}
+
+			.ui-listview {
+				.ui-btn {
+					padding-left: 2em;
+				}
+			}
+		}
+
+		.ui-collapsible,
+		.ui-collapsible-content,
+		.ui-btn {
+			background: none !important;
+			font-size: 0.9rem !important;
+			font-weight: 400 !important;
+			border: none !important;
+		}
+
+		.ui-collapsible, 
+		.ui-collapsible-content {
+		}
+		
+		.ui-btn.ui-btn-active {
+			color: #3388cc !important;
+		}
+
+		.ui-btn::after {
+			opacity: 0;
+			-webkit-transition: opacity 500ms ease;
+			-moz-transition: opacity 500ms ease;
+			transition: opacity 500ms ease;
+		}
+
+		.ui-btn:hover::after {
+			opacity: .4;
+		}
+	}
+
+	.meteo-settings-panel {
+		width: 26em;
+		right: -26em;
+		z-index: 1003; /* Puts the panel on top of the dismiss modal which is not adjusted to custom width */
+
+		&.ui-panel-animate.ui-panel-position-right {
+			-webkit-transform: translate3d(26em,0,0);
+			-moz-transform: translate3d(26em,0,0);
+			transform: translate3d(26em,0,0);
+		}
+
+		.ui-btn {
+			font-size: 0.8rem !important;
+		}
+	}
+	
+	.ui-panel-dismiss-open.ui-panel-dismiss-position-right {
+		left: -17em;
+		right: 17em;
+	}
+}
+
+@media (min-width: 35em) {
+	.meteo-block-content {
+		min-height: 10em;
+	}
+}
+
+
+// 35em is for block stacked
+@media (max-width: 35em) {
+
+	.meteo-block-content {
+		border: none;
+		margin: 0;
+	}
+
+	.infos {
+		margin: 0.25em;
+		border: 1px solid $skin-color4;
+	}
+
+
+}
+
+@import "contentblocks";

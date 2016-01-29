@@ -1,0 +1,21 @@
+@import "azoommixins";
+
+// general color definition 
+
+$blue: #0093D7;
+$red: #C20016;
+$lightgrey: rgb(213,213,213);
+$darkgrey: rgb(128,128,128);
+$black: rgb(0,0,0);
+$white: rgb(255,255,255);
+$green: #23aa00;
+
+// general font definitions
+$font-family1: Arial, Helvetica, sans-serif !global;
+$font-family2: "Courier New", Courier, monospace !global; 
+
+$skin-color1: $blue !global;
+$skin-color2: $red !global;
+$skin-color3: $darkgrey !global;
+$skin-color4: $lightgrey !global;
+$skin-color5: $green !global;

@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+@import "copyright";
+@import "azoommixins";
+@import "variables";
+
+
+#headercontainer {
+}
+
+// maincontent
+#maincontentcontainer {
+	padding-top: 24px;
+
+	#maincontent {
+
+		.content {
+			min-height: 450px;
+			xxmax-width: 603px;
+			
+			.contentpictures {
+				margin-right: -190px;
+			}
+			
+			img {
+				max-width: 603px;
+				height: auto;	
+			}
+			
+		}
+	}
+
+	#sidecontent1 {
+	}
+
+	#sidecontent2 {
+	}
+} // maincontent
+
+

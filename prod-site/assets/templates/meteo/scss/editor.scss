@@ -1,0 +1,38 @@
+@charset "utf-8";
+@import "copyright";
+@import "azoommixins";
+@import "variables";
+
+p {
+	
+	&.justifyright {
+		text-align: right;	
+	}
+	
+	&.justifyleft {
+		text-align: left;	
+	}
+	
+	&.justifyfull {
+		text-align: justify;	
+	}
+}
+
+h1 {
+
+}
+
+
+.grey {
+	color: $darkgrey !important;		
+}
+
+td {
+	vertical-align: top;
+}
+
+.lighttable {
+	td, th {
+		padding: 5px;
+	}
+}

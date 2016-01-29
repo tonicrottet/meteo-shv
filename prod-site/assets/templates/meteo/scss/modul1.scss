@@ -1,0 +1,72 @@
+@charset "utf-8";
+
+@import "copyright";
+@import "azoommixins";
+@import "websitemixins";
+@import "variables";
+
+@keyframes opacityAnimation {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+@-o-keyframes opacityAnimation{
+  0%   { opacity: 1; }
+  50%  { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes opacityAnimation{
+  0%   { opacity: 1; }
+  50%  { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+@-webkit-keyframes opacityAnimation{
+  0%   { opacity: 1; }
+  50%  { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+.pictureplayer {
+	.pp-container {
+
+		.pp-picture-container {
+			width: 100%;
+			text-align: center;
+
+			&.loading {
+				background-image: url("../images/logo3sw.png");
+				-webkit-animation: opacityAnimation 3s infinite;
+				-moz-animation: opacityAnimation 3s infinite;
+				-o-animation: opacityAnimation 3s infinite;
+				 animation: opacityAnimation 3s infinite;
+			}
+			
+			background-repeat: no-repeat;
+			background-position: center center;
+
+			img {
+				width: 100%;
+				max-width: 800px;
+			}
+		}
+		
+		.pp-controls-container {
+			padding-top: 1em;
+
+
+			.pp-controls {
+				input.pp-slider {
+					display: none;
+				}
+
+				.ui-slider-track {
+					margin-left: 15px;
+					background-repeat: no-repeat;
+				}
+			}
+		}
+
+	}
+
+}
+

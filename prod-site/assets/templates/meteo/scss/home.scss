@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+@import "copyright";
+@import "azoommixins";
+@import "variables";
+
+
+
+// maincontent
+#homecontent {
+	
+	padding-top: 1em;
+	
+	display: table;
+	width: 100%;
+	
+	.newsteaser {
+		display: table-cell;
+		width: $containersize1-3;	
+	}
+	
+	.genericcontent {
+		display: table-cell;	
+	}
+}

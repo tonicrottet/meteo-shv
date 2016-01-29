@@ -1,0 +1,4 @@
+cd "/Users/toni/azoom/projekte/meteo-shv/site/assets/templates/meteo/"
+sass --style expanded --watch scss:css
+
+

@@ -1,0 +1,28 @@
+/******************************************
+** 
+** Copyright (c), 2014, azoom.ch 
+** 
+** Created by Toni Crottet (toni@azoom.ch)
+**
+*******************************************/
+p.justifyright {
+  text-align: right;
+}
+p.justifyleft {
+  text-align: left;
+}
+p.justifyfull {
+  text-align: justify;
+}
+
+.grey {
+  color: gray !important;
+}
+
+td {
+  vertical-align: top;
+}
+
+.lighttable td, .lighttable th {
+  padding: 5px;
+}

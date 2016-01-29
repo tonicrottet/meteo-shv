@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+@import "copyright";
+@import "azoommixins";
+@import "websitemixins";
+@import "variables";
+
+
+.modul-link {
+	h3 {
+		text-transform: uppercase;
+	}
+
+	.link-picturecontainer {
+		position: relative;
+		display: inline-block;
+		
+		a {
+			 vertical-align: middle;
+		}
+
+		img {
+			position: relative;
+			width: 300px;
+		}
+
+		h3 {
+			position: absolute;
+			top: 33%;
+			right: 0px;
+			left: 0px;
+
+			z-index: 1;
+
+			color: $skin-color2;
+
+			text-shadow: none;
+			vertical-align: middle;
+			text-align: center;
+
+			padding: 0;
+
+			transform: rotate(-25deg);
+			-webkit-transform: rotate(-25deg);
+			-moz-transform: rotate(-25deg);
+			-ms-transform: rotate(-25deg);
+			-o-transform: rotate(-25deg);
+
+		}
+	}
+
+
+}
